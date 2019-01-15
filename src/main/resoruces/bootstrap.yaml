@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: configmap
+  cloud:
+    kubernetes:
+      reload:
+        enabled: true
+

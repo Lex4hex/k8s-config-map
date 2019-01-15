@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: configmap
+  labels:
+    app: configmap
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: configmap
+      labels:
+        app: configmap
+    spec:
+      containers:
+        - name: configmap
+          image: smart-ticketing/configmap
+          imagePullPolicy: Never
+          volumeMounts:
+            - mountPath: "/deployments/config"
+              name: config-volume
+              readOnly: true
+      restartPolicy: Always
+      volumes:
+        - name: config-volume
+          configMap:
+            name: configmap
+            items:
+              - key: hrdt.properties
+                path: hrdt.properties
+  selector:
+    matchLabels:
+      app: configmap
