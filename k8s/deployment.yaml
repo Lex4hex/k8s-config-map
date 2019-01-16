@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: configmap
+  name: configmap-test-app
   labels:
-    app: configmap
+    app: configmap-test-app
 spec:
   replicas: 1
   template:
     metadata:
-      name: configmap
+      name: configmap-test-app
       labels:
-        app: configmap
+        app: configmap-test-app
     spec:
       containers:
-        - name: configmap
+        - name: configmap-test-app
           image: smart-ticketing/configmap
           imagePullPolicy: Never
           volumeMounts:
@@ -24,10 +24,10 @@ spec:
       volumes:
         - name: config-volume
           configMap:
-            name: configmap
+            name: configmap-test-app-config-map
             items:
-              - key: hrdt.properties
-                path: hrdt.properties
+              - key: application.properties
+                path: application.properties
   selector:
     matchLabels:
-      app: configmap
+      app: configmap-test-app
