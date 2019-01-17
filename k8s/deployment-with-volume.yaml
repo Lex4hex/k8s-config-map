@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: configmap-test-app
+  labels:
+    app: configmap-test-app
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: configmap-test-app
+      labels:
+        app: configmap-test-app
+    spec:
+      containers:
+        - name: configmap-test-app
+          image: smart-ticketing/configmap
+          imagePullPolicy: Never
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: volume-config-profile
+          volumeMounts:
+            - mountPath: "/deployments/config"
+              name: config-volume
+              readOnly: true
+      restartPolicy: Always
+      volumes:
+        - name: config-volume
+          configMap:
+            name: configmap-test-app-config-map
+            items:
+              - key: hrdt.application.properties
+                path: hrdt.application.properties
+  selector:
+    matchLabels:
+      app: configmap-test-app
