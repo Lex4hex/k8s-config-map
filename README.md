@@ -1,26 +1,20 @@
 ## Spring Cloud Kubernetes configuration management test project
    
-There are two cases of property source configuration: 
- - Using automatic ConfigMap discovery through k8s API and name provided in bootstap.yaml (default Spring profile) 
- - Using ConfigMap volume mount (volume-config-profile Spring profile) 
- 
- Each of these configurations use `deployment.yaml` (`build-and-deploy.sh`) and `deployment-with-volume.yaml` 
- (`build-and-deploy-with-volume.sh`) respectively 
+In this repository you will find four cases of using Kubernetes and Spring Cloud Kubernetes Config to configure 
+Spring Boot application:
+ - Using environment property
+ - Mounting application.properties into default Spring discovered location
+ - Mounting *.properties file and using Spring Kubernetes to specify it's location 
+ - Using `@ConfigurationProperty` classes with Spring Kubernetes Config reload 
 
 ### Automatic build and run
-- Run script  
-```build-and-deploy.sh``` or  
-`build-and-deploy-with-volume.sh`
+- You need to have Kubernetes cluster installed and running
+- You need to install Ingress  Nginx controller https://kubernetes.github.io/ingress-nginx/deploy/
+- Run an init script. It builds project and creates network and ConfigMap Kubernetes objects  
+`./k8s/init.sh`
+- Run a shell script for required configuration located in  
+`k8s/deployment_scripts`
 
-### Manual build and run
-- Build project with Maven:  
-`mvn clean install`
-- Build a Dockerfile:  
-`dockerfile:build`
-- Create a ConfigMap:  
-`k create configmap configmap-test-app-config-map --from-file application.properties`
-- Deploy:  
-`k create -f deployment.yaml`
-
-Now you can edit ConfigMap and see changes in application's log:  
-`k edit configmap configmap-test-app-config-map`
+### Test configuration
+Now you can test deployed configuration by making a GET request  
+`curl localhost/get-properties`

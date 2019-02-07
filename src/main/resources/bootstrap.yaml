@@ -1,6 +1,11 @@
 spring:
   application:
     name: configmap-test-app
+
+---
+
+spring:
+  profiles: spring-cloud-cubernetes-profile
   cloud:
     kubernetes:
       reload:
@@ -8,7 +13,7 @@ spring:
         mode: polling
         period: 5000
       config:
-        name: configmap-test-app-config-map
+        name: example-reloadable-configmap
 
 ---
 
@@ -17,6 +22,4 @@ spring:
   cloud:
     kubernetes:
       config:
-        paths: "/deployments/config"
-        # Here we reset ConfigMap name to check that we actually get values from mounted volume
-        name: ${spring.application.name}
+        paths: "/config-volume/"

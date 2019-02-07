@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: example-volume-configmap
+  namespace: default
+data:
+  application.properties: |-
+    value.property=Hello, I'm from volume

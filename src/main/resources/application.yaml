@@ -6,5 +6,3 @@ management:
       enabled: true
     info:
       enabled: true
-placeholder:
-  property: ${PLACEHOLDER.PROPERTY.TEST}

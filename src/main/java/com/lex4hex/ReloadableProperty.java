@@ -5,9 +5,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ConfigurationProperties(prefix = "test")
+@ConfigurationProperties(prefix = "reloadable")
 @Data
-public class ReloadableProperties {
+public class ReloadableProperty {
 
     private String property;
 }

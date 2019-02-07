@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: configmap-test-app
+  labels:
+    app: configmap-test-app
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: configmap-test-app
+      labels:
+        app: configmap-test-app
+    spec:
+      containers:
+        - name: configmap-test-app
+          image: smart-ticketing/configmap
+          imagePullPolicy: Never
+          env:
+          - name: EXAMPLE_ENV_PROPERTY
+            valueFrom:
+              configMapKeyRef:
+                name: example-environment-configmap
+                key: env.property.example
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: configmap-test-app

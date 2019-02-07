@@ -16,7 +16,18 @@ spec:
         - name: configmap-test-app
           image: smart-ticketing/configmap
           imagePullPolicy: Never
+          volumeMounts:
+            - mountPath: "/opt/config/"
+              name: config-volume
+              readOnly: true
       restartPolicy: Always
+      volumes:
+        - name: config-volume
+          configMap:
+            name: example-volume-configmap
+            items:
+              - key: application.properties
+                path: application.properties
   selector:
     matchLabels:
       app: configmap-test-app
