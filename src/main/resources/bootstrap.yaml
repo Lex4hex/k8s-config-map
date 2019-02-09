@@ -22,4 +22,4 @@ spring:
   cloud:
     kubernetes:
       config:
-        paths: "/config-volume/"
+        paths: "/config-volume/example.application.properties"

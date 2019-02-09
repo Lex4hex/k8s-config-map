@@ -34,7 +34,6 @@ public class PropertyTesterController {
                 new StringBuilder().append("SPRING PROFILE: ").append(Arrays.toString(environment.getActiveProfiles()))
                         .append("\n");
 
-
         if (!valueProperty.equals("NOT FOUND")) {
             propertyString
                     .append("\n").append("VALUE PROPERTY: ").append(valueProperty).append("\n");

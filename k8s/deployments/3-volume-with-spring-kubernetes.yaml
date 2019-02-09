@@ -20,7 +20,7 @@ spec:
             - name: SPRING_PROFILES_ACTIVE
               value: volume-config-profile
           volumeMounts:
-            - mountPath: "/config-volume/"
+            - mountPath: /config-volume
               name: config-volume
               readOnly: true
       restartPolicy: Always
