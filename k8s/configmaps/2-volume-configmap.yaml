@@ -5,4 +5,4 @@ metadata:
   namespace: default
 data:
   application.properties: |-
-    value.property=Hello, I'm from volume
+    example.property=Hello, I'm from volume

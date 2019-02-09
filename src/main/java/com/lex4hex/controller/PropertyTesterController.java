@@ -1,5 +1,8 @@
-package com.lex4hex;
+package com.lex4hex.controller;
 
+import com.lex4hex.property.DatabaseAuthProperty;
+import com.lex4hex.property.ExampleProperty;
+import com.lex4hex.property.ReloadableProperty;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
@@ -12,19 +15,22 @@ import java.util.Arrays;
 @RestController("/")
 public class PropertyTesterController {
 
-    @Value("${value.property:NOT FOUND}")
-    private String valueProperty;
-
-    private final ReloadableProperty reloadableProperty;
-
     @Value("${EXAMPLE_ENV_PROPERTY:NOT FOUND}")
     private String environmentProperty;
 
+    private final ReloadableProperty reloadableProperty;
+
+    private final ExampleProperty exampleProperty;
+
+    private final DatabaseAuthProperty databaseAuthProperty;
+
     private Environment environment;
 
-    public PropertyTesterController(ReloadableProperty reloadableProperty,
-            Environment environment) {
+    public PropertyTesterController(ReloadableProperty reloadableProperty, ExampleProperty exampleProperty,
+            DatabaseAuthProperty databaseAuthProperty, Environment environment) {
         this.reloadableProperty = reloadableProperty;
+        this.exampleProperty = exampleProperty;
+        this.databaseAuthProperty = databaseAuthProperty;
         this.environment = environment;
     }
 
@@ -34,9 +40,9 @@ public class PropertyTesterController {
                 new StringBuilder().append("SPRING PROFILE: ").append(Arrays.toString(environment.getActiveProfiles()))
                         .append("\n");
 
-        if (!valueProperty.equals("NOT FOUND")) {
+        if (exampleProperty.getProperty() != null) {
             propertyString
-                    .append("\n").append("VALUE PROPERTY: ").append(valueProperty).append("\n");
+                    .append("\n").append("EXAMPLE PROPERTY: ").append(exampleProperty.getProperty()).append("\n");
         }
 
         if (reloadableProperty.getProperty() != null) {
@@ -45,6 +51,11 @@ public class PropertyTesterController {
 
         if (!environmentProperty.equals("NOT FOUND")) {
             propertyString.append("ENVIRONMENT PROPERTY:").append(environmentProperty);
+        }
+
+        if (databaseAuthProperty.getPassword() != null && databaseAuthProperty.getUsername() != null) {
+            propertyString.append("SECRET: username=").append(databaseAuthProperty.getUsername()).append(" password=")
+                    .append(databaseAuthProperty.getPassword());
         }
 
         return propertyString.toString();

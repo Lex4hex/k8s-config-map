@@ -5,6 +5,15 @@ spring:
 ---
 
 spring:
+  profiles: volume-config-profile
+  cloud:
+    kubernetes:
+      config:
+        paths: "/config-volume/example.application.properties"
+
+---
+
+spring:
   profiles: spring-cloud-cubernetes-profile
   cloud:
     kubernetes:
@@ -18,8 +27,8 @@ spring:
 ---
 
 spring:
-  profiles: volume-config-profile
+  profiles: sercrets-profile
   cloud:
     kubernetes:
-      config:
-        paths: "/config-volume/example.application.properties"
+      secrets:
+        paths: "/secrets-volume/"

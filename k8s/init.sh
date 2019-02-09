@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 cd ../
 
-mvn clean install
-mvn dockerfile:build
+./mvnw clean install
+./mvnw dockerfile:build
 
 cd k8s
 
@@ -11,3 +11,5 @@ kubectl create -f configmaps
 
 kubectl delete -f network
 kubectl create -f network
+
+kubectl delete -f deployments

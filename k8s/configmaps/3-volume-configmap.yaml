@@ -5,4 +5,4 @@ metadata:
   namespace: default
 data:
   example.application.properties: |-
-    value.property=Hello, I'm from volume, but I'm loaded by Spring Kubernetes
+    example.property=Hello, I'm from volume, but I'm loaded by Spring Kubernetes
