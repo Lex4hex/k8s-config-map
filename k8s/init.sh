@@ -2,7 +2,6 @@
 cd ../
 
 ./mvnw clean install
-./mvnw dockerfile:build
 
 cd k8s
 
