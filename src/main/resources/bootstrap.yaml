@@ -14,7 +14,7 @@ spring:
 ---
 
 spring:
-  profiles: spring-cloud-cubernetes-profile
+  profiles: spring-cloud-kubernetes-profile
   cloud:
     kubernetes:
       reload:
@@ -27,7 +27,7 @@ spring:
 ---
 
 spring:
-  profiles: sercrets-profile
+  profiles: secrets-profile
   cloud:
     kubernetes:
       secrets:

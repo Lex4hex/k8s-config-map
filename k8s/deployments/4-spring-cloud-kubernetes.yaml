@@ -18,7 +18,7 @@ spec:
           imagePullPolicy: Never
           env:
             - name: SPRING_PROFILES_ACTIVE
-              value: spring-cloud-cubernetes-profile
+              value: spring-cloud-kubernetes-profile
       restartPolicy: Always
   selector:
     matchLabels:
